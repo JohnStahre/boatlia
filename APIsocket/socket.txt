@@ -1,0 +1,27 @@
+Webbsocket:
+
+En websocket är nånting som kommunicerar mellan klienter och en server. Vi öppnar upp en tvåvägskommunikation klienter
+som är full duplex, det går åt båda hållen över TCP, detta kan vi göra med node, läsa och skriva direkt mot en server.. 
+
+npm init -y
+Socket.io är ett paket som hanterar och hjälper oss med webbsocket delen och fungerar på alla webbläsaren
+används tillsammans med express
+
+npm init -y skrivs så vi får vår package.json
+
+npm i express socket.io
+
+npm i -D nodemon 
+
+byter om lite i package.json  "test": "echo \"Error: no test specified\" && exit 1"
+
+script
+byter till "start " : "node index" : 
+
+och ett dev script där vi säger "nodemon index"
+
+kan behöva använda CORS paket: https://www.section.io/engineering-education/how-to-use-cors-in-nodejs-with-express/
+
+
+
+
