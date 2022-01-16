@@ -1,18 +1,48 @@
 // detta är vår server
-const express = require('express');
+const app = require('express')();
 // för att använda sockets behöver vi också http modulen
-const http = require('http');
-const path = require('path');
-const socket = require('socket.io');
-// middleware paket "cors" kan behövas att användas
-// const cors = require('cors');
+const server = require("http").createServer(app);
+const cors = require("cors");
 
-// const io = require("socket.io")(server, {
-//     cors: {
-//         origin: "*",
-//         methods: ["GET", "POST"]
-//     }
-// })
+// const path = require('path');
+// const socket = require('socket.io');
+// middleware paket "cors" kan behövas att användas
+const cors = require('cors');
+
+const io = require("socket.io")(server, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"]
+    }
+});
+
+app.use(cors());
+
+// lägger in en local host port nedan så läng, förhoppningen är att kanske undersökar hur det funkar och ändra
+// använda docker?
+const PORT = process.env.PORT || 3000;
+
+app.get("/", (req, res) => {
+    res.send('Server is running.');
+});
+
+io.on('connection', (socket) => {
+    socket.emit('me', socket.id);
+});
+
+socket.on('disconnect', () => {
+    socket.broadcast.emit("callended");
+});
+
+// 11:22 in i film
+
+
+server.listen(PORT, () => {
+    console.log('server running on http://localhost:' + PORT);
+});
+
+
+
 
 const app = express();
 // kastar in vår express i http server
@@ -25,21 +55,16 @@ const server = http.createServer(app);
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// lägger in en local host port nedan så läng, förhoppningen är att kanske undersökar hur det funkar och ändra
-// använda docker?
-const PORT = process.env.PORT || 3000;
 
-server.listen(PORT, () => {
-    console.log('server running on http://localhost:' + PORT);
-})
+
+
 
 const io = socket(server);
 
 // skapar en eventlistener med ett connection events
 // när någon connectar till vår socket kommer det att finnas info i vår socket.
 
-io.on('connection', socket => {
-    console.log('New user connected', socket.id);
+
     // När vi har fått ett connection vill vi göra allting som är här innanför.
     // specifiera vad vi vill göra
 
