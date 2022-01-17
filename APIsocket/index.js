@@ -2,7 +2,7 @@
 const app = require('express')();
 // för att använda sockets behöver vi också http modulen
 const server = require("http").createServer(app);
-const cors = require("cors");
+
 
 // const path = require('path');
 // const socket = require('socket.io');
@@ -23,7 +23,7 @@ app.use(cors());
 const PORT = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
-    res.send('Server is running.');
+    res.send('Server is running Johnny Bravo.');
 });
 
 io.on('connection', (socket) => {
@@ -45,7 +45,7 @@ io.on('connection', (socket) => {
 
 // 11:22 in i film
 
-server.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+server.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
 
 
 // server.listen(PORT, () => {
