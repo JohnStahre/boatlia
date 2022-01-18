@@ -1,0 +1,42 @@
+// 55 min in i videon Options
+// eventuellt ta bort socket client i back end
+// fixa script JS filen
+// options component så vi kan se den andras skärm
+
+import React from 'react';
+import React, {useContext} from 'react'
+import { Box } from "@mui/system";
+import { SocketContext } from './SocketContext';
+
+const BackCamera = () => {
+    return (
+      <Box sx={{ height: 500, backgroundColor: "black" }}>
+        <Box sx={{ color: "white", mx: "auto", textAlign: "center" }}>
+          Back Camera
+        </Box>
+      </Box>
+    );
+  };
+  
+  export default BackCamera;
+  
+
+const Options = ( {children}) => {
+    const {me, callAccepted, name, setName, callEnded, leaveCall, callUser} = useContext(SocketContext);
+    const [idToCall, setIDToCall] = useState('');
+    // const classes = usestyles();
+     const classes = BackCamera();
+    
+    return (
+        <div>
+            <Box sx={{ height: 500, backgroundColor: "black" }}>
+            <Box sx={{ color: "white", mx: "auto", textAlign: "center" }}>
+                <typography gutterbottom variant= "h6"> Camera info</typography>
+                <textField>1.01</textField>
+
+            Back Camera
+            </Box>
+            </Box>
+        </div>
+    )
+}

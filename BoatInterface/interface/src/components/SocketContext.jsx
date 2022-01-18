@@ -1,8 +1,8 @@
-import React, { createConext, useState, useRef, useEffect } from 'react';
+import React, { createContext, useState, useRef, useEffect } from 'react';
 import { io, Socket } from 'socket.io-client';
 import Peer from 'simple-peer';
 
-const SocketContext = createConext();
+const SocketContext = createContext();
 
 const socket = io('http://localhost:3000');
 
@@ -12,7 +12,7 @@ const ContextProvider = ({ children }) => {
     const [call, setCall] = useState({});
     const [callAccepted, setCallAccepted] = useState(false);
     const [callEnded, setCallEnded] = useState(false);
-    const [name, setNAme] = useState('')
+    const [name, setName] = useState('')
 
 
     const myVideo = useRef();
@@ -85,7 +85,7 @@ const ContextProvider = ({ children }) => {
 
     }
     return (
-        <SocketContext.Provider value={{call,callAccepted,myVideo,userVideo,stream,name,setName,callEnded,me,callUser,leaveCall,answerCall,
+        <SocketContext.Provider value={{call,callAccepted,myVideo,userVideo,stream,name, setName,  callEnded,me,callUser,leaveCall,answerCall,
         }}>
             {children}
 
